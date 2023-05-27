@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Minesweeper Cricket!
+        </title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="start-page">
+        <h1>
+            MINESWEEPER CRICKET!
+        </h1>
+        <pre class="texts"><h2> How to Play</h2>
+            Enter the grid size you want to play on. The number can be any integer from 6 to 11.
+            Select the gamemode you want to play from the dropdown.
+            Click on Play Now! to start a new game.
+            On the grid, click on the blocks in order to play and score points!
+            Hope you enjoy!</pre>
+        <pre class="texts"><h2> Basic Game Rules</h2>
+            You are the batsman! You need to score as many runs as possible while avoiding all the fielders!
+            There will be eleven fielders against you, placed randomly all over the grid. 
+            The number of runs you score will be written on the block once you click it. 
+            One block can get you either 1, 2, 3, 4 or 6 runs. These runs will add up to your total score!
+            Once you select a block with a fielder, the game will end.</pre>
+            <form id="start-form">
+                <label for="grid-size">Enter the grid size : </label><br>
+                <input type="number" id="grid-size" min="5" max="12" required>
+                <button id="start-button">Play Now!</button>
+            </form>
+        </div>
+         <div id="game-page" style="display: none;">
+            <h1>MINESWEEPER CRICKET!</h1>
+            <div id="game-grid"></div>
+            <p id="score">Score: 0</p>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
