@@ -32,10 +32,11 @@ function initializeGame(updatedGridSize) {
             block.dataset.col = j;
             block.addEventListener('click', blockClickHandler);
             gameGridElement.appendChild(block);
-            gameGrid[i][j] = { fielder: false, revealed: false };
+            gameGrid[i][j] = { fielder: false, revealed: false, score: 0 };
         }
     }
     placeFielders(updatedSize);
+    setScores(updatedSize);
     document.getElementById('start-page').style.display = 'none';
     document.getElementById('game-page').style.display = 'block';
 }
@@ -43,11 +44,9 @@ function initializeGame(updatedGridSize) {
 // Place fielders randomly on the grid
 function placeFielders(updatedSize) {
     let fieldersToPlace = fieldersCount;
-
     while (fieldersToPlace > 0) {
         const randomRow = Math.floor(Math.random() * updatedSize);
         const randomCol = Math.floor(Math.random() * updatedSize);
-
         if (!gameGrid[randomRow][randomCol].fielder) {
             gameGrid[randomRow][randomCol].fielder = true;
             fieldersToPlace--;
@@ -55,10 +54,76 @@ function placeFielders(updatedSize) {
     }
 }
 
+function setScores(gridSize) {
+    const updatedGridSize = parseInt(gridSize);
+    if (updatedGridSize == 5) {
+        placeScores(5, 4, 2, 2, 1, 5);
+    }
+    if (updatedGridSize == 6) {
+        placeScores(10, 5, 4, 4, 2, 6);
+    }
+    if (updatedGridSize == 7) {
+        placeScores(15, 9, 6, 5, 3, 7);
+    }
+    if (updatedGridSize == 8) {
+        placeScores(23, 12, 8, 6, 4, 8)
+    }
+}
+function placeScores(num1, num2, num3, num4, num6, gridSize) {
+    const updatedGridSize = parseInt(gridSize);
+    let num1c = parseInt(num1);
+    let num2c = parseInt(num2);
+    let num3c = parseInt(num3);
+    let num4c = parseInt(num4);
+    let num6c = parseInt(num6);
+    while (num1c > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        // alert(randomRow + " " + randomCol + " " + gameGrid[randomRow][randomCol].fielder + " " + gameGrid[randomRow][randomCol].score)
+        if (!gameGrid[randomRow][randomCol].fielder && parseInt(gameGrid[randomRow][randomCol].score) == 0) {
+            // alert("this is reached")
+            gameGrid[randomRow][randomCol].score = 1;
+            num1c--;
+            // alert(num1c)
+        }
+    }
+    while (num2c > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && gameGrid[randomRow][randomCol].score == 0) {
+            gameGrid[randomRow][randomCol].score = 2;
+            num2c--;
+        }
+    }
+    while (num3c > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && gameGrid[randomRow][randomCol].score == 0) {
+            gameGrid[randomRow][randomCol].score = 3;
+            num3c--;
+        }
+    }
+    while (num4c > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && gameGrid[randomRow][randomCol].score == 0) {
+            gameGrid[randomRow][randomCol].score = 4;
+            num4c--;
+        }
+    }
+    while (num6c > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && gameGrid[randomRow][randomCol].score == 0) {
+            gameGrid[randomRow][randomCol].score = 6;
+            num6c--;
+        }
+    }
+}
 // Click event handler for game blocks
 function blockClickHandler(event) {
     if (isGameOver) return;
-
+    // alert("this is reached")
     const row = parseInt(event.target.dataset.row);
     const col = parseInt(event.target.dataset.col);
 
@@ -67,8 +132,22 @@ function blockClickHandler(event) {
     }
     else {
         gameGrid[row][col].revealed = true;
-        event.target.style.backgroundColor = 'white';
-        increaseScore(runScore);
+        if (gameGrid[row][col].score == 1) {
+            event.target.style.backgroundColor = 'cyan';
+        }
+        if (gameGrid[row][col].score == 2) {
+            event.target.style.backgroundColor = 'green';
+        }
+        if (gameGrid[row][col].score == 3) {
+            event.target.style.backgroundColor = 'purple';
+        }
+        if (gameGrid[row][col].score == 4) {
+            event.target.style.backgroundColor = 'orange';
+        }
+        if (gameGrid[row][col].score == 6) {
+            event.target.style.backgroundColor = 'yellow';
+        }
+        increaseScore(gameGrid[row][col].score);
     }
 }
 
@@ -93,6 +172,21 @@ function endGame() {
         const col = block.dataset.col;
         if (gameGrid[row][col].fielder) {
             block.dataset.fielder = true;
+        }
+        if (gameGrid[row][col].score == 1) {
+            block.dataset.score = 1;
+        }
+        if (gameGrid[row][col].score == 2) {
+            block.dataset.score = 2;
+        }
+        if (gameGrid[row][col].score == 3) {
+            block.dataset.score = 3;
+        }
+        if (gameGrid[row][col].score == 4) {
+            block.dataset.score = 4;
+        }
+        if (gameGrid[row][col].score == 6) {
+            block.dataset.score = 6;
         }
     }
 }

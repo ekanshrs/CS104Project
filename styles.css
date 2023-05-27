@@ -13,6 +13,7 @@ h1{
 #game-grid {
     align-items: center;
     display: grid;
+    align-self: center;
     grid-gap: 2px;
     margin-top: 20px;
 }
@@ -29,4 +30,24 @@ h1{
 
 .block[data-fielder="true"] {
     background-color: red;
+}
+
+.block[data-score="1"] {
+    background-color: cyan;
+}
+
+.block[data-score="2"] {
+    background-color: green;
+}
+
+.block[data-score="3"] {
+    background-color: purple;
+}
+
+.block[data-score="4"] {
+    background-color: orange;
+}
+
+.block[data-score="6"] {
+    background-color: yellow;
 }
