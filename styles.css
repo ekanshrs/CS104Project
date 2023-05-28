@@ -6,19 +6,20 @@ h1{
     font-size: 13pt;
 }
 
-#start-page, #game-page {
-    text-align: center;
-}
+body {
+    background-color: #43def3;
+} 
 
 #game-grid {
     align-items: center;
     display: grid;
-    align-self: center;
+    justify-content: center;
     grid-gap: 2px;
     margin-top: 20px;
 }
 
 .block {
+    border-radius: 4px;
     width: 50px;
     height: 50px;
     background-color: gray;
@@ -32,22 +33,62 @@ h1{
     background-color: red;
 }
 
-.block[data-score="1"] {
-    background-color: cyan;
+.container {
+    margin: 50px auto;
+    width: 80%;
+    background-color: #91c9f1;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(214, 100, 140, 0.2);
+    font-family: Arial, sans-serif;
 }
 
-.block[data-score="2"] {
-    background-color: green;
+.checkbox-container {
+    margin-bottom: 20px;
+    padding: 20px 20px 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #257bbd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.block[data-score="3"] {
-    background-color: purple;
+.checkbox-container-container {
+    margin-bottom: 20px;
+    padding: 20px 20px 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #257bbd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.block[data-score="4"] {
-    background-color: orange;
+.checkbox-label {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.block[data-score="6"] {
-    background-color: yellow;
+.checkbox-input {
+    display: none;
 }
+
+.checkbox-input:checked+.text {
+    display: block;
+}
+
+.text {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #b3d1e6;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.text-background {
+    background-color: #25d167;
+    font-size: 18pt;
+    color: #333;
+}
+  

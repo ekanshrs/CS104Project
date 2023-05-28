@@ -66,7 +66,19 @@ function setScores(gridSize) {
         placeScores(15, 9, 6, 5, 3, 7);
     }
     if (updatedGridSize == 8) {
-        placeScores(23, 12, 8, 6, 4, 8)
+        placeScores(23, 12, 8, 6, 4, 8);
+    }
+    if (updatedGridSize == 9) {
+        placeScores(30, 15, 11, 8, 6, 9);
+    }
+    if (updatedGridSize == 10) {
+        placeScores(38, 19, 12, 11, 9, 10);
+    }
+    if (updatedGridSize == 11) {
+        placeScores(49, 21, 15, 14, 11, 11);
+    }
+    if (updatedGridSize == 12) {
+        placeScores(60, 24, 18, 17, 14, 12);
     }
 }
 function placeScores(num1, num2, num3, num4, num6, gridSize) {
@@ -123,7 +135,6 @@ function placeScores(num1, num2, num3, num4, num6, gridSize) {
 // Click event handler for game blocks
 function blockClickHandler(event) {
     if (isGameOver) return;
-    // alert("this is reached")
     const row = parseInt(event.target.dataset.row);
     const col = parseInt(event.target.dataset.col);
 
@@ -133,19 +144,24 @@ function blockClickHandler(event) {
     else {
         gameGrid[row][col].revealed = true;
         if (gameGrid[row][col].score == 1) {
-            event.target.style.backgroundColor = 'cyan';
+            event.target.classList.add('text-background');
+            event.target.textContent = '1';
         }
         if (gameGrid[row][col].score == 2) {
-            event.target.style.backgroundColor = 'green';
+            event.target.classList.add('text-background');
+            event.target.textContent = '2';
         }
         if (gameGrid[row][col].score == 3) {
-            event.target.style.backgroundColor = 'purple';
+            event.target.classList.add('text-background');
+            event.target.textContent = '3';
         }
         if (gameGrid[row][col].score == 4) {
-            event.target.style.backgroundColor = 'orange';
+            event.target.classList.add('text-background');
+            event.target.textContent = '4';
         }
         if (gameGrid[row][col].score == 6) {
-            event.target.style.backgroundColor = 'yellow';
+            event.target.classList.add('text-background');
+            event.target.textContent = '6';
         }
         increaseScore(gameGrid[row][col].score);
     }
@@ -174,19 +190,24 @@ function endGame() {
             block.dataset.fielder = true;
         }
         if (gameGrid[row][col].score == 1) {
-            block.dataset.score = 1;
+            block.classList.add('text-background');
+            block.textContent = '1';  
         }
         if (gameGrid[row][col].score == 2) {
-            block.dataset.score = 2;
+            block.classList.add('text-background');
+            block.textContent = '2';
         }
         if (gameGrid[row][col].score == 3) {
-            block.dataset.score = 3;
+            block.classList.add('text-background');
+            block.textContent = '3';
         }
         if (gameGrid[row][col].score == 4) {
-            block.dataset.score = 4;
+            block.classList.add('text-background');
+            block.textContent = '4';
         }
         if (gameGrid[row][col].score == 6) {
-            block.dataset.score = 6;
+            block.classList.add('text-background');
+            block.textContent = '6';
         }
     }
 }

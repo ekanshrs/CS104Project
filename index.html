@@ -1,39 +1,113 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            Minesweeper Cricket!
-        </title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div id="start-page">
-        <h1>
-            MINESWEEPER CRICKET!
-        </h1>
-        <pre class="texts"><h2> How to Play</h2>
-            Enter the grid size you want to play on. The number can be any integer from 6 to 11.
-            Select the gamemode you want to play from the dropdown.
-            Click on Play Now! to start a new game.
-            On the grid, click on the blocks in order to play and score points!
-            Hope you enjoy!</pre>
-        <pre class="texts"><h2> Basic Game Rules</h2>
-            You are the batsman! You need to score as many runs as possible while avoiding all the fielders!
-            There will be eleven fielders against you, placed randomly all over the grid. 
-            The number of runs you score will be written on the block once you click it. 
-            One block can get you either 1, 2, 3, 4 or 6 runs. These runs will add up to your total score!
-            Once you select a block with a fielder, the game will end.</pre>
-            <form id="start-form">
-                <label for="grid-size">Enter the grid size : </label><br>
-                <input type="number" id="grid-size" min="5" max="12" required>
-                <button id="start-button">Play Now!</button>
-            </form>
+
+<head>
+    <title>
+        Minesweeper Cricket!
+    </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="start-page">
+        <div class="container">
+            <h1>
+                MINESWEEPER CRICKET!
+            </h1>
+            <div class="checkbox-container">
+                <label for="toggle1" class="checkbox-label">How to Play</label>
+                <input type="checkbox" id="toggle1" class="checkbox-input">
+                <div class="text" id="text1">
+                    <ul>
+                        <li> Select the grid size you want to play on. The number can be any integer
+                            from 5 to 12.</li>
+                        <li> Select the gamemode you want to play from the dropdown</li>
+                        <li>Click on Play Now! to start a new game.</li>
+                        <li>On the grid, click on the blocks in order to play and score points!</li>
+                        <li>Enjoy the game!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="checkbox-container">
+                <label for="toggle2" class="checkbox-label">Basic Game Rules</label>
+                <input type="checkbox" id="toggle2" class="checkbox-input">
+                <div class="text" id="text2">
+                    <ul>
+                        <li>You are the batsman! You need to score as many runs as possible while
+                            avoiding all the fielders!</li>
+                        <li>There will be eleven fielders against you, placed randomly all over the grid.</li>
+                        <li>You have to randomly select the blocks to score runs. Its completely luck dependent!</li>
+                        <li>The number of runs you score will be written on the block once you click it.</li>
+                        <li>One block can get you either 1, 2, 3, 4 or 6 runs. These runs will add up to your total
+                            score!</li>
+                        <li>Once you select a block with a fielder, the game will end.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="checkbox-container">
+                <label for="toggle3" class="checkbox-label">Game Modes</label>
+                <input type="checkbox" id="toggle3" class="checkbox-input">
+                <div class="text" id="text3">Here are the various game modes you can play!
+                    <div class="checkbox-container">
+                        <label for="toggle4" class="checkbox-label"> Extras </label>
+                        <input type="checkbox" id="toggle4" class="checkbox-input">
+                        <div class="text" id="text4">
+                            <ul>
+                                <li>In this mode, a certain number of squares will have No Ball or Wides in addition to
+                                    the
+                                    runs.</li>
+                                <li>If you select a block with a No Ball, then you will score one additional run.
+                                    Additionally, on the next ball, if you land on a fielder, the game will not end and
+                                    you will be able
+                                    to
+                                    continue.</li>
+                                <li>If you select a square with a Wide, then you will score one additional run.
+                                    Additionally,
+                                    on
+                                    the next ball, you will score double the score of the block you select. However, you
+                                    are not
+                                    invincible from fielders.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="checkbox-container">
+                        <label for="toggle5" class="checkbox-label"> Box Cricket </label>
+                        <input type="checkbox" id="toggle5" class="checkbox-input">
+                        <div class="text" id="text5">
+                            <ul>
+                                <li>In this mode, we have a shortage of players, so we are resorting to box cricket. The
+                                    classic box cricket rules will apply!</li>
+                                <li>The number of fielders will be lesser. However, you will only be able to score dots
+                                    i.e 0 runs, 1 run or 2 runs.</li>
+                                <li>Five dots and you're out!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-         <div id="game-page" style="display: none;">
-            <h1>MINESWEEPER CRICKET!</h1>
-            <div id="game-grid"></div>
-            <p id="score">Score: 0</p>
-        </div>
-        <script src="script.js"></script>
-    </body>
+        <form id="start-form">
+            <label for="grid-size">Enter the grid size : </label><br>
+            <input type="number" id="grid-size" min="5" max="12" required>
+            <button id="start-button">Play Now!</button>
+        </form>
+    </div>
+    <div id="game-page" style="display: none;">
+        <h1>MINESWEEPER CRICKET!</h1>
+        <div id="game-grid"></div>
+        <p id="score">Score: 0</p>
+    </div>
+    <script>
+        var checkboxes = document.querySelectorAll('.checkbox-input');
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', function () {
+                var index = Array.prototype.indexOf.call(checkboxes, this);
+                texts[index].style.display = this.checked ? 'block' : 'none';
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
 </html>
