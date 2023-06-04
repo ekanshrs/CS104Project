@@ -7,9 +7,32 @@ let score;
 let fieldersRemaining;
 let isGameOver;
 
+// Event listener for the form submission
+const startForm = document.getElementById('start-form');
+const gameModeSelect = document.getElementById('game-mode');
+startForm.addEventListener('submit', startFormSubmit);
+
+function startFormSubmit(event) {
+    event.preventDefault();
+    const gridSizeInput = document.getElementById('grid-size');
+    const gridSize = parseInt(gridSizeInput.value);
+    const gameMode = gameModeSelect.value;
+    startGame(gridSize, gameMode);
+}
+
+// Start the game
+function startGame(gridSize, gameMode) {
+    const updatedGridSize = parseInt(gridSize);
+    const startButton = document.getElementById('start-button');
+    startButton.removeEventListener('click', startFormSubmit);
+    startButton.disabled = true;
+    initializeGame(updatedGridSize, gameMode);
+}
+
 // Initialize the game
-function initializeGame(updatedGridSize) {
-    const updatedSize = parseInt(updatedGridSize);
+function initializeGame(gridSize, gameMode) {
+    const updatedSize = parseInt(gridSize);
+    const updatedGameMode = gameMode;
     // Check if the entered grid size is valid
     if (isNaN(updatedSize) || updatedSize < 5 || updatedSize > 12) {
         alert('Please enter a number between 6 and 11.');
@@ -21,7 +44,7 @@ function initializeGame(updatedGridSize) {
     isGameOver = false;
     const gameGridElement = document.getElementById('game-grid');
     gameGridElement.innerHTML = '';
-    gameGridElement.style.gridTemplateColumns = `repeat(${updatedGridSize}, 50px)`;
+    gameGridElement.style.gridTemplateColumns = `repeat(${gridSize}, 50px)`;
 
     for (let i = 0; i < updatedSize; i++) {
         gameGrid[i] = [];
@@ -32,71 +55,92 @@ function initializeGame(updatedGridSize) {
             block.dataset.col = j;
             block.addEventListener('click', blockClickHandler);
             gameGridElement.appendChild(block);
-            gameGrid[i][j] = { fielder: false, revealed: false, score: 0 };
+            gameGrid[i][j] = { fielder: false, revealed: false, score: 0, noball: false, wide: false };
         }
     }
-    placeFielders(updatedSize);
-    setScores(updatedSize);
+    placeFielders(updatedSize, updatedGameMode);
+    setScores(updatedSize, updatedGameMode);
     document.getElementById('start-page').style.display = 'none';
     document.getElementById('game-page').style.display = 'block';
 }
 
 // Place fielders randomly on the grid
-function placeFielders(updatedSize) {
-    let fieldersToPlace = fieldersCount;
-    while (fieldersToPlace > 0) {
-        const randomRow = Math.floor(Math.random() * updatedSize);
-        const randomCol = Math.floor(Math.random() * updatedSize);
-        if (!gameGrid[randomRow][randomCol].fielder) {
-            gameGrid[randomRow][randomCol].fielder = true;
-            fieldersToPlace--;
+function placeFielders(updatedSize, updatedGameMode) {
+    const gameMode = updatedGameMode;
+    if (gameMode === "basic" || gameMode === "extras") {
+        let fieldersToPlace = fieldersCount;
+        while (fieldersToPlace > 0) {
+            const randomRow = Math.floor(Math.random() * updatedSize);
+            const randomCol = Math.floor(Math.random() * updatedSize);
+            if (!gameGrid[randomRow][randomCol].fielder){
+                gameGrid[randomRow][randomCol].fielder = true;
+                fieldersToPlace--;
+            }
         }
     }
 }
 
-function setScores(gridSize) {
-    const updatedGridSize = parseInt(gridSize);
-    if (updatedGridSize == 5) {
-        placeScores(5, 4, 2, 2, 1, 5);
+function setScores(gridSize, updatedGameMode) {
+    const gameMode = updatedGameMode;
+    if (gameMode === "basic") {
+        const updatedGridSize = parseInt(gridSize);
+        if (updatedGridSize == 5) {
+            placeScores(0, 5, 4, 2, 2, 1, 0, 0, 5);
+        }
+        if (updatedGridSize == 6) {
+            placeScores(0, 10, 5, 4, 4, 2, 0, 0, 6);
+        }
+        if (updatedGridSize == 7) {
+            placeScores(0, 15, 9, 6, 5, 3, 0, 0, 7);
+        }
+        if (updatedGridSize == 8) {
+            placeScores(0, 23, 12, 8, 6, 4, 0, 0, 8);
+        }
+        if (updatedGridSize == 9) {
+            placeScores(0, 30, 15, 11, 8, 6, 0, 0, 9);
+        }
+        if (updatedGridSize == 10) {
+            placeScores(0, 38, 19, 12, 11, 9, 0, 0, 10);
+        }
+        if (updatedGridSize == 11) {
+            placeScores(0, 49, 21, 15, 14, 11, 0, 0, 11);
+        }
+        if (updatedGridSize == 12) {
+            placeScores(0, 60, 24, 18, 17, 14, 0, 0, 12);
+        }
     }
-    if (updatedGridSize == 6) {
-        placeScores(10, 5, 4, 4, 2, 6);
-    }
-    if (updatedGridSize == 7) {
-        placeScores(15, 9, 6, 5, 3, 7);
-    }
-    if (updatedGridSize == 8) {
-        placeScores(23, 12, 8, 6, 4, 8);
-    }
-    if (updatedGridSize == 9) {
-        placeScores(30, 15, 11, 8, 6, 9);
-    }
-    if (updatedGridSize == 10) {
-        placeScores(38, 19, 12, 11, 9, 10);
-    }
-    if (updatedGridSize == 11) {
-        placeScores(49, 21, 15, 14, 11, 11);
-    }
-    if (updatedGridSize == 12) {
-        placeScores(60, 24, 18, 17, 14, 12);
+    if (gameMode === "extras") {
+        const updatedGridSize = parseInt(gridSize);
+        if (updatedGridSize == 5) {
+            placeScores(0, 5, 4, 2, 2, 1, 2, 1, 5);
+        }
     }
 }
-function placeScores(num1, num2, num3, num4, num6, gridSize) {
+
+function placeScores(num0, num1, num2, num3, num4, num6, num_wide, num_noball, gridSize) {
     const updatedGridSize = parseInt(gridSize);
+    let num0c = parseInt(num0);
     let num1c = parseInt(num1);
     let num2c = parseInt(num2);
     let num3c = parseInt(num3);
     let num4c = parseInt(num4);
     let num6c = parseInt(num6);
+    let num_widec = parseInt(num_wide);
+    let num_noballc = parseInt(num_noball);
+    while (num0c > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && parseInt(gameGrid[randomRow][randomCol].score) == 0) {
+            gameGrid[randomRow][randomCol].score = 0;
+            num0c--;
+        }
+    }
     while (num1c > 0) {
         const randomRow = Math.floor(Math.random() * updatedGridSize);
         const randomCol = Math.floor(Math.random() * updatedGridSize);
-        // alert(randomRow + " " + randomCol + " " + gameGrid[randomRow][randomCol].fielder + " " + gameGrid[randomRow][randomCol].score)
         if (!gameGrid[randomRow][randomCol].fielder && parseInt(gameGrid[randomRow][randomCol].score) == 0) {
-            // alert("this is reached")
             gameGrid[randomRow][randomCol].score = 1;
             num1c--;
-            // alert(num1c)
         }
     }
     while (num2c > 0) {
@@ -131,7 +175,24 @@ function placeScores(num1, num2, num3, num4, num6, gridSize) {
             num6c--;
         }
     }
+    while (num_widec > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && !gameGrid[randomRow][randomCol].noball && !gameGrid[randomRow][randomCol].wide) {
+            gameGrid[randomRow][randomCol].wide = true;
+            num_widec--;
+        }
+    }
+    while (num_noballc > 0) {
+        const randomRow = Math.floor(Math.random() * updatedGridSize);
+        const randomCol = Math.floor(Math.random() * updatedGridSize);
+        if (!gameGrid[randomRow][randomCol].fielder && !gameGrid[randomRow][randomCol].wide && !gameGrid[randomRow][randomCol].noball) {
+            gameGrid[randomRow][randomCol].noball = true;
+            num_noballc--;
+        }
+    }
 }
+
 // Click event handler for game blocks
 function blockClickHandler(event) {
     if (isGameOver) return;
@@ -143,27 +204,40 @@ function blockClickHandler(event) {
     }
     else {
         gameGrid[row][col].revealed = true;
-        if (gameGrid[row][col].score == 1) {
+        if (gameGrid[row][col].wide == true) {
+            event.target.classList.add('wide-background');
+            event.target.textContent = gameGrid[row][col].score + ' Wide';
+        }
+        else if (gameGrid[row][col].noball == true) {
+            event.target.classList.add('noball-background');
+            event.target.textContent = gameGrid[row][col].score + '\n No Ball';
+        }
+        else if (gameGrid[row][col].score == 1) {
             event.target.classList.add('text-background');
             event.target.textContent = '1';
         }
-        if (gameGrid[row][col].score == 2) {
+        else if (gameGrid[row][col].score == 2) {
             event.target.classList.add('text-background');
             event.target.textContent = '2';
         }
-        if (gameGrid[row][col].score == 3) {
+        else if (gameGrid[row][col].score == 3) {
             event.target.classList.add('text-background');
             event.target.textContent = '3';
         }
-        if (gameGrid[row][col].score == 4) {
+        else if (gameGrid[row][col].score == 4) {
             event.target.classList.add('text-background');
             event.target.textContent = '4';
         }
-        if (gameGrid[row][col].score == 6) {
+        else if (gameGrid[row][col].score == 6) {
             event.target.classList.add('text-background');
             event.target.textContent = '6';
         }
-        increaseScore(gameGrid[row][col].score);
+        if (gameGrid[row][col].wide == true || gameGrid[row][col].noball == true) {
+            increaseScore(gameGrid[row][col].score + 1);
+        }
+        else {
+            increaseScore(gameGrid[row][col].score);
+        }
     }
 }
 
@@ -189,45 +263,35 @@ function endGame() {
         if (gameGrid[row][col].fielder) {
             block.dataset.fielder = true;
         }
-        if (gameGrid[row][col].score == 1) {
-            block.classList.add('text-background');
-            block.textContent = '1';  
+        if(gameGrid[row][col].wide == true){
+            block.classList.add('wide-background');
+            block.textContent = gameGrid[row][col].score + ' Wide';
         }
-        if (gameGrid[row][col].score == 2) {
+        else if(gameGrid[row][col].noball == true){
+            block.classList.add('noball-background');
+            block.textContent = gameGrid[row][col].score + '\n No Ball';
+        }
+        else if (gameGrid[row][col].score == 1) {
+            block.classList.add('text-background');
+            block.textContent = '1';
+        }
+        else if (gameGrid[row][col].score == 2) {
             block.classList.add('text-background');
             block.textContent = '2';
         }
-        if (gameGrid[row][col].score == 3) {
+        else if (gameGrid[row][col].score == 3) {
             block.classList.add('text-background');
             block.textContent = '3';
         }
-        if (gameGrid[row][col].score == 4) {
+        else if (gameGrid[row][col].score == 4) {
             block.classList.add('text-background');
             block.textContent = '4';
         }
-        if (gameGrid[row][col].score == 6) {
+        else if (gameGrid[row][col].score == 6) {
             block.classList.add('text-background');
             block.textContent = '6';
         }
     }
 }
 
-// Start the game
-function startGame(gridSize) {
-    const updatedGridSize = parseInt(gridSize);
-    const startButton = document.getElementById('start-button');
-    startButton.removeEventListener('click', startFormSubmit);
-    startButton.disabled = true;
-    initializeGame(updatedGridSize);
-}
 
-function startFormSubmit(event) {
-    event.preventDefault();
-    const gridSizeInput = document.getElementById('grid-size');
-    const gridSize = parseInt(gridSizeInput.value);
-    startGame(gridSize);
-}
-
-// Event listener for the form submission
-const startForm = document.getElementById('start-form');
-startForm.addEventListener('submit', startFormSubmit);

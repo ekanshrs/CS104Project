@@ -91,4 +91,17 @@ body {
     font-size: 18pt;
     color: #333;
 }
-  
+
+.wide-background {
+    background-color: #25d167;
+    font-size: 15pt;
+    text-align: center;
+    color: #333;
+}
+
+.noball-background {
+    background-color: #25d167;
+    font-size: 13pt;
+    text-align: center;
+    color: #333;
+}
