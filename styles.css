@@ -105,3 +105,40 @@ body {
     text-align: center;
     color: #333;
 }
+
+.safe-background {
+    background-color: #5c00cc;
+    font-size: 14pt;
+    text-align: center;
+    color: #ffffff;
+}
+
+.out-background {
+    background-color: red;
+    font-size: 18pt;
+    text-align: center;
+    color: #333;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
