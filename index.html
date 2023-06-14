@@ -86,21 +86,23 @@
                 </div>
             </div>
         </div>
-        <form id="start-form">
-            <label for="grid-size">Enter the grid size : </label><br>
-            <input type="number" id="grid-size" min="5" max="12" required> <br>
+        <div class="forms">
+        <form id="start-form" class="start-form">
+            <label for="grid-size"> Enter the grid size : </label><br>
+            <input type="number" id="grid-size" min="5" max="12" required> <br><br>
 
             <label for="game-mode">Select the game mode:</label><br>
             <select id="game-mode">
                 <option value="basic">Basic</option>
                 <option value="extras">Extras</option>
                 <option value="boxcricket">Box Cricket</option>
-            </select><br>
+            </select><br><br>
             <button id="start-button">Play Now!</button>
         </form>
+        </div>
     </div>
     <div id="game-page" style="display: none;">
-        <h1>MINESWEEPER CRICKET!</h1>
+        <h1 class="gamehead">MINESWEEPER CRICKET!</h1>
         <div id="game-grid"></div>
         <p id="score">Score: 0</p>
     </div>

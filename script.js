@@ -89,7 +89,7 @@ function placeFielders(updatedSize, updatedGameMode) {
             const randomCol = Math.floor(Math.random() * updatedSize);
             if (!gameGrid[randomRow][randomCol].fielder) {
                 gameGrid[randomRow][randomCol].fielder = true;
-                alert(randomRow + " " + randomCol)
+                // alert(randomRow + " " + randomCol)       
                 fieldersToPlace--;
             }
         }
@@ -101,7 +101,7 @@ function placeFielders(updatedSize, updatedGameMode) {
             const randomCol = Math.floor(Math.random() * updatedSize);
             if (!gameGrid[randomRow][randomCol].fielder) {
                 gameGrid[randomRow][randomCol].fielder = true;
-                alert(randomRow + " " + randomCol)
+                // alert(randomRow + " " + randomCol)
                 fieldersToPlace--;
             }
         }
@@ -257,7 +257,7 @@ function placeScores(num0, num1, num2, num3, num4, num6, num_wide, num_noball, n
         const randomCol = Math.floor(Math.random() * updatedGridSize);
         if (!gameGrid[randomRow][randomCol].fielder && !gameGrid[randomRow][randomCol].noball && !gameGrid[randomRow][randomCol].wide) {
             gameGrid[randomRow][randomCol].wide = true;
-            alert("Wide - " + randomRow + " " + randomCol)
+            // alert("Wide - " + randomRow + " " + randomCol)
             num_widec--;
         }
     }
@@ -266,7 +266,7 @@ function placeScores(num0, num1, num2, num3, num4, num6, num_wide, num_noball, n
         const randomCol = Math.floor(Math.random() * updatedGridSize);
         if (!gameGrid[randomRow][randomCol].fielder && !gameGrid[randomRow][randomCol].wide && !gameGrid[randomRow][randomCol].noball) {
             gameGrid[randomRow][randomCol].noball = true;
-            alert("No Ball - " + randomRow + " " + randomCol)
+            // alert("No Ball - " + randomRow + " " + randomCol)
             num_noballc--;
         }
     }
@@ -287,7 +287,7 @@ function blockClickHandler(event) {
 
     const row = parseInt(event.target.dataset.row);
     const col = parseInt(event.target.dataset.col);
-    
+
     if (!gameGrid[row][col].revealed) {
         // alert("The value of counter is " + counter)
         if (counter == 0) {
@@ -331,7 +331,7 @@ function blockClickHandler(event) {
         //     endGame();
         // }
         else if (!gameGrid[row][col].fielder && !gameGrid[prevRow][prevCol].wide && !gameGrid[row][col].dot) {
-            alert("this ball didnt have fielder")
+            // alert("this ball didnt have fielder")
             gameGrid[row][col].revealed = true;
             if (gameGrid[row][col].wide == true) {
                 event.target.classList.add('wide-background');
@@ -372,44 +372,45 @@ function blockClickHandler(event) {
                 increaseScore(gameGrid[row][col].score);
             }
         }
-    }
 
-    else if (!gameGrid[row][col].fielder && gameGrid[prevRow][prevCol].wide) {
-        alert("This ball didnt have a fielder and last ball had a wide")
-        gameGrid[row][col].revealed = true;
-        if (gameGrid[row][col].wide == true) {
-            event.target.classList.add('wide-background');
-            event.target.textContent = gameGrid[row][col].score + ' Wide x 2';
-        }
-        else if (gameGrid[row][col].noball == true) {
-            event.target.classList.add('noball-background');
-            event.target.textContent = gameGrid[row][col].score + '\n No Ball x 2';
-        }
-        else if (gameGrid[row][col].score == 1) {
-            event.target.classList.add('text-background');
-            event.target.textContent = '1 x 2';
-        }
-        else if (gameGrid[row][col].score == 2) {
-            event.target.classList.add('text-background');
-            event.target.textContent = '2 x 2';
-        }
-        else if (gameGrid[row][col].score == 3) {
-            event.target.classList.add('text-background');
-            event.target.textContent = '3 x 2';
-        }
-        else if (gameGrid[row][col].score == 4) {
-            event.target.classList.add('text-background');
-            event.target.textContent = '4 x 2';
-        }
-        else if (gameGrid[row][col].score == 6) {
-            event.target.classList.add('text-background');
-            event.target.textContent = '6 x 2';
-        }
-        if (gameGrid[row][col].wide == true || gameGrid[row][col].noball == true) {
-            increaseScore(2 * gameGrid[row][col].score + 2);
-        }
-        else {
-            increaseScore(2 * gameGrid[row][col].score);
+
+        else if (!gameGrid[row][col].fielder && gameGrid[prevRow][prevCol].wide) {
+            alert("This ball didnt have a fielder and last ball had a wide")
+            gameGrid[row][col].revealed = true;
+            if (gameGrid[row][col].wide == true) {
+                event.target.classList.add('wide-background');
+                event.target.textContent = gameGrid[row][col].score + ' Wide x 2';
+            }
+            else if (gameGrid[row][col].noball == true) {
+                event.target.classList.add('noball-background');
+                event.target.textContent = gameGrid[row][col].score + '\n No Ball x 2';
+            }
+            else if (gameGrid[row][col].score == 1) {
+                event.target.classList.add('text-background');
+                event.target.textContent = '1 x 2';
+            }
+            else if (gameGrid[row][col].score == 2) {
+                event.target.classList.add('text-background');
+                event.target.textContent = '2 x 2';
+            }
+            else if (gameGrid[row][col].score == 3) {
+                event.target.classList.add('text-background');
+                event.target.textContent = '3 x 2';
+            }
+            else if (gameGrid[row][col].score == 4) {
+                event.target.classList.add('text-background');
+                event.target.textContent = '4 x 2';
+            }
+            else if (gameGrid[row][col].score == 6) {
+                event.target.classList.add('text-background');
+                event.target.textContent = '6 x 2';
+            }
+            if (gameGrid[row][col].wide == true || gameGrid[row][col].noball == true) {
+                increaseScore(2 * gameGrid[row][col].score + 2);
+            }
+            else {
+                increaseScore(2 * gameGrid[row][col].score);
+            }
         }
     }
 }

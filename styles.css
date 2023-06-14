@@ -1,14 +1,17 @@
-h1{
+h1 {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.texts{
+.texts {
     font-size: 13pt;
 }
 
 body {
-    background-color: #43def3;
-} 
+    background-image: url('stadium.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 #game-grid {
     align-items: center;
@@ -29,8 +32,23 @@ body {
     cursor: pointer;
 }
 
+/* .start-form {
+    align-items: center;
+} */
 .block[data-fielder="true"] {
     background-color: red;
+}
+
+.forms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    width: 15%;
+    background-color: #91c9f1;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(214, 100, 140, 0.2);
 }
 
 .container {
@@ -119,26 +137,25 @@ body {
     text-align: center;
     color: #333;
 }
+
 button {
+    border-radius: 8px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
-  }
-  
-  form {
-    margin-top: 20px;
-  }
-  
-  label {
+}
+
+label {
     font-size: 16px;
     font-weight: bold;
     margin-right: 10px;
-  }
-  
-  select {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+select {
     padding: 5px;
     font-size: 16px;
-  }
+}
