@@ -5,6 +5,8 @@
     <title>
         Minesweeper Cricket!
     </title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -20,7 +22,7 @@
                 <div class="text" id="text1">
                     <ul>
                         <li> Select the grid size you want to play on. The number can be any integer
-                            from 5 to 12.</li>
+                            from 5 to 11.</li>
                         <li> Select the gamemode you want to play from the dropdown</li>
                         <li>Click on Play Now! to start a new game.</li>
                         <li>On the grid, click on the blocks in order to play and score points!</li>
@@ -89,7 +91,7 @@
         <div class="forms">
         <form id="start-form" class="start-form">
             <label for="grid-size"> Enter the grid size : </label><br>
-            <input type="number" id="grid-size" min="5" max="12" required> <br><br>
+            <input type="number" id="grid-size" min="5" max="11" required> <br><br>
 
             <label for="game-mode">Select the game mode:</label><br>
             <select id="game-mode">
@@ -104,6 +106,7 @@
     <div id="game-page" style="display: none;">
         <h1 class="gamehead">MINESWEEPER CRICKET!</h1>
         <div id="game-grid"></div>
+        <div id="blankspace"></div>
         <p id="score">Score: 0</p>
     </div>
     <script>
