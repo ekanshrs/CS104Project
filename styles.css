@@ -7,34 +7,23 @@ h1 {
 .texts {
     font-size: 13pt;
 }
+
 body {
     background-image: url('stadium.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
 }
-/* 
-#game-page {
-    height: 100%;
-    background-image: url('stadium.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
 
-/* #blankspace {
-    height: 220px;
-} */
 #game-grid {
     border: 3px solid #000000;
     margin: auto;
     margin-top: 20px;
-    /* margin-left: 500px; */
     align-items: center;
     display: grid;
     width: fit-content;
     justify-content: center;
     grid-gap: 2px;
-    /* margin-top: 20px; */
     background-color: #07b449;
     padding: 10px;
     border-radius: 10px;
@@ -63,6 +52,7 @@ body {
     box-shadow: 0 0 10px rgba(214, 100, 140, 0.2);
     font-family: Arial, sans-serif;
 }
+
 .block[data-fielder="true"] {
     background-color: red;
 }
@@ -95,15 +85,6 @@ body {
     margin-bottom: 20px;
     padding: 20px 20px 10px 20px;
     border: 3px solid #000000;
-    border-radius: 5px;
-    background-color: #257bbd;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-container-container {
-    margin-bottom: 20px;
-    padding: 20px 20px 10px 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #257bbd;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -169,13 +150,13 @@ body {
 }
 
 button {
+    border: 3px solid #000000;
     margin-left: 33px;
     border-radius: 8px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #4CAF50;
     color: white;
-    border: none;
     cursor: pointer;
 }
 
@@ -189,4 +170,19 @@ label {
 select {
     padding: 5px;
     font-size: 16px;
+}
+
+#score {
+    border: 3px solid #000000;
+    margin: auto;
+    margin-top: 20px;
+    width: 10%;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
